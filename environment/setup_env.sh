@@ -5,6 +5,6 @@ source lxplus_env.sh
 export PATH=$DEEPTOPRECO/scripts:$PATH
 export PYTHONPATH=$DEEPTOPRECO/modules:$PYTHONPATH
 export LD_LIBRARY_PATH=$DEEPTOPRECO/modules:$LD_LIBRARY_PATH
-cd -
+cd $DEEPTOPRECO/environment
 
 echo "DeepTopReco environment set up"

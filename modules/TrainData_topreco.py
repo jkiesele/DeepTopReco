@@ -1,17 +1,15 @@
 
 
-from TrainData import TrainData
+from TrainData_topreco_base import TrainData_topreco_base,fileTimeOut
+import numpy
 
-class TrainData_topreco(TrainData):
+class TrainData_topreco(TrainData_topreco_base):
     
     def __init__(self):
-        TrainData.__init__(self)
+        TrainData_topreco_base.__init__(self)
         
-        self.treename="data"
         
-        self.undefTruth=[]
-        self.truthclasses=['']
-        self.registerBranches(['gen_mttbar'])
+        self.registerBranches(['gen_mttbar','rho'])
         
         self.weightbranchX='gen_mttbar'
         
@@ -21,10 +19,12 @@ class TrainData_topreco(TrainData):
                 600,700],dtype=float)
         
         
-        self.weightbranchY='gen_mttbar' #just a dummy branch for now. needed for 2D reco
+        self.weightbranchY='rho' #just a dummy branch for now. needs to be different from x branch. 
+        # this input is needed for 2D reco
+        
         #make just one bin - no reweighting in second variable
         self.weight_binY = numpy.array(
-            [-1,1e10],
+            [-1e10,1e10],
             dtype=float
             )
         
@@ -33,13 +33,13 @@ class TrainData_topreco(TrainData):
         ########################## #define the branches to be read ################################
         ###########################################################################################
         #global variables
-        self.addBranches(['nj','nl','nb']) 
+        #self.addBranches(['nj','nl','nb']) 
         #one lepton
         self.addBranches(['l_pt','l_eta','l_phi','l_m'],1) 
         #one met - the explicit 1 can be omitted
         self.addBranches(['met_pt','met_phi']) 
         #six  jets
-        self.addBranches(['j_pt','j_eta','j_phi','j_m','j_csv'],6) 
+        self.addBranches(['j_pt','j_eta','j_phi','j_m'],6) 
         
         
         
