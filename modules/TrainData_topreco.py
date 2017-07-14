@@ -8,8 +8,12 @@ class TrainData_topreco(TrainData_topreco_base):
     def __init__(self):
         TrainData_topreco_base.__init__(self)
         
-        
-        self.registerBranches(['gen_mttbar','rho'])
+        ##
+        ## register any branch you use later here.
+        ## exceptions are branches that are added with addBranch (see below)
+        ## it does not harm to add branches twice.
+        ##
+        self.registerBranches(['gen_mttbar','met_phi'])
         
         self.weightbranchX='gen_mttbar'
         
@@ -19,12 +23,12 @@ class TrainData_topreco(TrainData_topreco_base):
                 600,700],dtype=float)
         
         
-        self.weightbranchY='rho' #just a dummy branch for now. needs to be different from x branch. 
+        self.weightbranchY='met_phi' #just a dummy branch for now. needs to be different from x branch. 
         # this input is needed for 2D reco
         
         #make just one bin - no reweighting in second variable
         self.weight_binY = numpy.array(
-            [-1e10,1e10],
+            [-5,5],
             dtype=float
             )
         
@@ -42,7 +46,7 @@ class TrainData_topreco(TrainData_topreco_base):
         self.addBranches(['j_pt','j_eta','j_phi','j_m'],6) 
         
         
-        
+        self.regressiontargetclasses=['reg_mttbar']
         
         
     def readFromRootFile(self,filename,TupleMeanStd, weighter):
@@ -97,10 +101,9 @@ class TrainData_topreco(TrainData_topreco_base):
         
         
         
-        
+        oldlength=self.nsamples
         if self.remove:
             notremoves=weighter.createNotRemoveIndices(Tuple)
-            
             # this has do be done for each array produced before
             # don't forget!
             # it selects only the entries from the array that should not be removed,
@@ -109,9 +112,12 @@ class TrainData_topreco(TrainData_topreco_base):
             truth=truth[notremoves > 0]
             
             
+            print("kept "+str(int(float(self.nsamples)/float(oldlength))*100)+"%" )
+            
         # we don't use weights for now, so we fill the weight array with 1
         weights=numpy.empty(self.nsamples)
         weights.fill(1.)
+        self.nsamples=truth.shape[0]
         
         
         # any array that shoul dbe used by the DNN needs to be added here

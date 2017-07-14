@@ -10,9 +10,9 @@ def mymodel(Inputs,nclasses,nregclasses,dropoutRate):
 
     allinputs=Inputs[0]
 
-    x=  Dense(32, activation='relu',kernel_initializer='lecun_uniform', name='dense_1')(allinputs)
-    x=  Dense(32, activation='relu',kernel_initializer='lecun_uniform', name='dense_2')(x)
-    x=  Dense(32, activation='relu',kernel_initializer='lecun_uniform', name='dense_3')(x)
+    x=  Dense(128, activation='relu',kernel_initializer='lecun_uniform', name='dense_1')(allinputs)
+    x=  Dense(128, activation='relu',kernel_initializer='lecun_uniform', name='dense_2')(x)
+    x=  Dense(128, activation='relu',kernel_initializer='lecun_uniform', name='dense_3')(x)
 
 
     prediction =   Dense(nregclasses, activation='linear',kernel_initializer='ones',name='mttbar_pred')(x)
@@ -26,15 +26,15 @@ def mymodel(Inputs,nclasses,nregclasses,dropoutRate):
 train=training_base(testrun=False)
 
 
-train.setModel(mymodel,dropoutRate=0.1)
+train.setModel(mymodel,dropoutRate=0.125)
 
-train.compileModel(learningrate=0.005,
+train.compileModel(learningrate=0.002,
                    loss=['mean_squared_error'],
                    metrics=['accuracy'])
 
 
-model,history = train.trainModel(nepochs=5, 
-                                 batchsize=250, 
+model,history = train.trainModel(nepochs=50, 
+                                 batchsize=2000, 
                                  stop_patience=300, 
                                  lr_factor=0.5, 
                                  lr_patience=10, 
