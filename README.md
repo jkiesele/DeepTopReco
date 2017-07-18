@@ -60,7 +60,7 @@ source setup_env.sh
 ```
 
 
-The preparation training consists of the following steps
+The preparation for the training consists of the following steps
 ====
 
 - define the data structure for the training (example in modules/TrainData_topreco.py)
@@ -81,10 +81,7 @@ The preparation training consists of the following steps
 
 
 - prepare the training file and the model. Please refer to DeepTopReco/Train/training_template.py
-  The command is along the lines of
-  ```
-  python training_template.py /path/to/the/output/of/convert/dataCollection.dc <output dir>
-  ```
+  
 
 
 Training
@@ -108,10 +105,16 @@ screen -r
 
 Please close the session when the training is finished
 
+the training is launched in the following way:
+```
+python train_template.py /path/to/the/output/of/convert/dataCollection.dc <output dir of your choice>
+```
+
 
 Evaluation
 ====
 
+After the training has finished, the performance can be evaluated.
 The evaluation consists of a few steps:
 
 1) converting the test data
