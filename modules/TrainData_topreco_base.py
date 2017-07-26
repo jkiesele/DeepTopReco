@@ -15,5 +15,5 @@ class TrainData_topreco_base(TrainData):
         self.treename="data"
         self.allbranchestoberead=[]
         self.undefTruth=[]
-        self.truthclasses=[]
-        self.reducedtruthclasses=[]
+        self.truthclasses=[''] #there needs to be one class (even if empty)
+        self.reducedtruthclasses=['']

@@ -44,6 +44,8 @@ class TrainData_topreco(TrainData_topreco_base):
         self.addBranches(['met_pt','met_phi']) 
         #six  jets
         self.addBranches(['j_pt','j_eta','j_phi','j_m'],6) 
+        #and the chi2 mttbar
+        self.addBranches(['mttbar_chi']) 
         
         
         self.regressiontargetclasses=['reg_mttbar']
