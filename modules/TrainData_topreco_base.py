@@ -16,3 +16,4 @@ class TrainData_topreco_base(TrainData):
         self.allbranchestoberead=[]
         self.undefTruth=[]
         self.truthclasses=['']
+        self.reducedtruthclasses=[]
