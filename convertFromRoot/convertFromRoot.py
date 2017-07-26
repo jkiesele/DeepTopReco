@@ -42,7 +42,8 @@ def main(argv=None):
     ########### add a new data structure class here #######
     #######################################################
     from TrainData_topreco  import TrainData_topreco
-    
+    import c_meanNormZeroPad
+    c_meanNormZeroPad.setTreeName("data")
     ########### ...and here 
     class_options = [
         TrainData_topreco,
